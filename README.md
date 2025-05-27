@@ -51,9 +51,7 @@ Tujuan utama dari proyek ini adalah untuk membangun sistem rekomendasi produk ya
 
 Untuk mencapai tujuan yang telah ditetapkan, maka akan diimplementasikan dua pendekatan utama dalam membangun sistem rekomendasi: Content-Based Filtering dan Collaborative Filtering.
 
-1. **Content-Based Filtering**
-
-Pendekatan Content-Based Filtering akan berfokus pada karakteristik intrinsik dari item (produk). Ide dasarnya adalah merekomendasikan item kepada pengguna yang "mirip" dengan item yang disukai pengguna di masa lalu.
+1. **Content-Based Filtering**: Pendekatan Content-Based Filtering akan berfokus pada karakteristik intrinsik dari item (produk). Ide dasarnya adalah merekomendasikan item kepada pengguna yang "mirip" dengan item yang disukai pengguna di masa lalu.
 
 *   **Cara Kerja:**
     *   Setiap produk akan direpresentasikan sebagai vektor fitur berdasarkan atribut-atributnya seperti nama produk, kategori, deskripsi, dan konten ulasan.
@@ -70,9 +68,7 @@ Pendekatan Content-Based Filtering akan berfokus pada karakteristik intrinsik da
     *   Sulit merekomendasikan item yang kontennya sangat berbeda dari preferensi pengguna di masa lalu (filter bubble).
     *   Membutuhkan analisis konten yang mendalam; jika konten item tidak deskriptif, kinerja rekomendasi bisa buruk.
 
-2. **Collaborative Filtering**
-
-Pendekatan Collaborative Filtering (CF) akan memanfaatkan data interaksi pengguna dengan item, khususnya rating produk dalam dataset ini. CF berasumsi bahwa pengguna yang memiliki preferensi serupa di masa lalu akan terus memiliki preferensi yang serupa di masa depan. Pendekatan yang akan digunakan adalah Model-Based CF menggunakan Neural Network.
+2. **Collaborative Filtering**: Pendekatan Collaborative Filtering (CF) akan memanfaatkan data interaksi pengguna dengan item, khususnya rating produk dalam dataset ini. CF berasumsi bahwa pengguna yang memiliki preferensi serupa di masa lalu akan terus memiliki preferensi yang serupa di masa depan. Pendekatan yang akan digunakan adalah Model-Based CF menggunakan Neural Network.
 
 *   **Cara Kerja:**
     *   Data interaksi (user_id, product_id, rating) akan digunakan sebagai input.
@@ -404,10 +400,11 @@ Model Content-Based Filtering merekomendasikan produk berdasarkan kemiripan kont
     Ketika pengguna melihat atau berinteraksi dengan suatu produk, model akan menggunakan matriks Cosine Similarity untuk mencari produk lain yang memiliki skor kemiripan tertinggi dengan produk tersebut. Produk-produk dengan skor kemiripan tertinggi (dan belum pernah dilihat/diulas oleh pengguna) akan direkomendasikan.
 
 *   **Output Top-N Recommendation:**
-    Model ini menghasilkan daftar Top-N rekomendasi produk yang paling mirip secara konten dengan produk referensi. Contoh output rekomendasi berdasarkan nama produk atau product ID telah ditampilkan di notebook, menunjukkan produk-produk dengan kategori atau deskripsi yang serupa.
+    Model ini menghasilkan daftar Top-N rekomendasi produk yang paling mirip secara konten dengan produk referensi. Contoh output rekomendasi berdasarkan nama produk atau product ID telah ditampilkan di notebook, menunjukkan produk-produk dengan kategori atau deskripsi yang serupa. Dilakukan Rekomendasi Berdasarkan Nama Produk dan Rekomendasi Berdasarkan Product diproleh saat melakukan Testing Rekomendasi
 
-Dilakukan Rekomendasi Berdasarkan Nama Produk dan Rekomendasi Berdasarkan Product diproleh saat melakukan Testing Rekomendasi
+    
 Tabel 3. Rekomendasi berdasarkan nama produk
+
 Recommendations for: AmazonBasics Flexible Premium HDMI Cable (Black, 4K@60Hz, 18Gbps), 3-Foot
 
 | product_id | product_name                                                        | category                                                         | about_product                                                                 | sub_category | combined_features                                                        | similarity_score |
@@ -420,7 +417,9 @@ Recommendations for: AmazonBasics Flexible Premium HDMI Cable (Black, 4K@60Hz, 1
 
 
 
+
 Tabel 4. Rekomendasi berdasarkan product ID
+
 Sample product ID: B07JW9H4J1
 
 Reference product details:
@@ -443,27 +442,25 @@ Recommended products:
 | B0B8SSC5D9 | AmazonBasics USB C to Lightning Aluminum with ...           | Computers&Accessories\|Accessories&Peripherals\|Cables              | USBCables      | AmazonBasics USB C to Lightning Aluminum with ...             |
 
 
-*   **Kelebihan Pendekatan Content-Based Filtering: [[5](https://mti.binus.ac.id/2023/05/31/sistem-rekomendasi-dengan-content-based/)]**
-    *   **Tidak Mengalami Cold-Start untuk Item Baru:** Dapat merekomendasikan produk baru asalkan memiliki deskripsi konten yang memadai, meskipun belum ada data interaksi pengguna.
-    *   **Rekomendasi yang Jelas:** Rekomendasi mudah dijelaskan karena didasarkan pada fitur-fitur produk itu sendiri.
-    *   **Independen dari Pengguna Lain:** Rekomendasi tidak dipengaruhi oleh preferensi pengguna lain, sehingga dapat memberikan rekomendasi yang sangat spesifik sesuai profil pengguna.
-Pendekatan CB dapat memberikan penjelasan mengenai logika yang digunakan dalam sistem rekomendasi mereka dalam merekomendasi item– item yang spesifik melalui penyediaan daftar fitur-fitur konten. Akibatnya, Pendekatan CB dapat memperkuat kepercayaan pengguna mengenai sistem rekomendasi yang mencerminkan preferensi pengguna itu sendiri.
-Pendekatan CB menawarkan personalization tingkat tinggi dalam rekomendasi.
-Pendekatan CB berkategori scalable dalam hal jumlah pengguna.
-Pendekatan CB dapat membuat rekomendasi untuk pengguna dengan minat khusus.
-Pendekatan CB memiliki keamanan tinggi dari penciptaan item berbahaya dan memungkinkan pengguna untuk mencegah pemasaran viral.
+*   **Kelebihan Pendekatan Content-Based Filtering [[5](https://mti.binus.ac.id/2023/05/31/sistem-rekomendasi-dengan-content-based/)]**:
+    *   Solusi Cold-Start untuk Produk Baru: Mampu merekomendasikan item baru secara efektif selama informasi deskriptif produk tersedia, tanpa memerlukan riwayat interaksi pengguna sebelumnya.
+    *   Transparansi Rekomendasi: Logika rekomendasi dapat dijelaskan secara jelas melalui fitur-fitur produk yang digunakan, meningkatkan kepercayaan pengguna terhadap sistem.
+    *   Personalisasi Tinggi: Rekomendasi bersifat independen dari perilaku pengguna lain, memungkinkan personalisasi yang spesifik berdasarkan profil pengguna individu.
+    *   Kemampuan Interpretasi: Sistem dapat menyajikan daftar karakteristik produk yang menjadi dasar rekomendasi, memperkuat transparansi dan akuntabilitas.
+    *   Skalabilitas: Memiliki performa yang stabil terhadap pertumbuhan jumlah pengguna karena tidak memerlukan data kolaboratif.
+    *   Fleksibilitas untuk Niche Market: Dapat menangani kasus khusus dimana pengguna memiliki preferensi unik yang jarang ditemui pada populasi umum.
+    *   Keamanan Sistem: Lebih resisten terhadap serangan manipulasi rekomendasi (shilling attacks) dan mencegah penyebaran konten viral yang tidak diinginkan.
+      
 
+*   **Kekurangan Pendekatan Content-Based Filtering [[5](https://mti.binus.ac.id/2023/05/31/sistem-rekomendasi-dengan-content-based/)]**:
+    *   Efek Filter Bubble: Cenderung menghasilkan rekomendasi homogen yang terbatas pada preferensi historis pengguna, mengurangi kesempatan untuk menemukan item di luar pola konsumsi yang ada.
+    *   Ketergantungan pada Kualitas Konten: Memerlukan metadata produk yang lengkap dan deskriptif. Rekomendasi menjadi tidak optimal jika deskripsi produk terlalu singkat, terdapat ketidakonsistenan terminologi, dan informasi fitur produk tidak terstruktur.
+    *   Kompleksitas Pemrosesan Konten: Menghadapi tantangan teknis dalam Ekstraksi fitur dari data tidak terstruktur (teks bebas), Normalisasi terminologi produk, dan Penanganan multibahasa.
+    *   Skalabilitas Operasional: Proses matching memerlukan komputasi intensif ketika Jumlah produk sangat besar (>1 juta SKU), Update katalog frekuen tinggi, dan Memproses query real-time.
+    *   Masalah Over-Specialization: Dampak negatif yang muncul yaitu Kurangnya variasi dalam rekomendasi, Kesulitan memperkenalkan produk baru (low serendipity), dan Potensi bias terhadap produk populer.
+    *   Limitasi Profil Pengguna: Keterbatasan dalam pemodelan preferensi yaitu Profil statis tidak menangkap evolusi minat, Pengguna berbeda bisa memiliki profil serupa, dan Kesulitan menangkap preferensi implisit.
 
-*   **Kekurangan Pendekatan Content-Based Filtering: [[5](https://mti.binus.ac.id/2023/05/31/sistem-rekomendasi-dengan-content-based/)]**
-    *   **Filter Bubble:** Cenderung merekomendasikan produk yang sangat mirip dengan apa yang sudah disukai pengguna, membatasi penemuan produk baru di luar minat yang ada.
-    *   **Membutuhkan Konten yang Kaya:** Kualitas rekomendasi sangat bergantung pada kelengkapan dan deskriptifnya konten produk.
-    *   **Membutuhkan Analisis Konten yang Kompleks:** Memproses dan mengekstraksi fitur dari data teks bisa menjadi kompleks.
-Jumlah item yang besar dianggap sebagai masalah utama karena ketika rekomendasi dibuat, konten setiap item harus diperiksa untuk menemukan item-item yang mungkin berhubungan dengan minat pengguna. Tugas ini rentan akan kesalahan dan memakan waktu.
-Profil pengguna dibangun berdasarkan karakteristik statis dari item–item. Akibatnya, ada kemungkinan besar pengguna yang berbeda memiliki profil yang sama meskipun mereka memiliki preferensi yang berbeda karena mereka mengomentari item–item yang sama.
-Masalah over–specialization terjadi pada pendekatan CB karena pengguna tidak menerima item–item yang beragam atau baru karena pembatasan dalam profilnya mengenai deskripsi item–item
-Overspecialization dapat menyebabkan isu pada serendipity ketika pengguna direkomendasikan dengan item–item yang terkenal.
-
-
+---
 ### 2. Collaborative Filtering
 
 Collaborative Filtering adalah salah satu algoritma dalam data science yang digunakan untuk memberikan rekomendasi kepada pengguna berdasarkan data historis tentang preferensi pengguna lain. Metode ini beroperasi dengan mengidentifikasi pengguna yang memiliki preferensi atau perilaku serupa dengan pengguna yang ingin menerima rekomendasi, dan kemudian memberikan rekomendasi berdasarkan apa yang disukai oleh pengguna-pengguna serupa tersebut [[6](https://dqlab.id/collaborative-filtering-pada-algoritma-data-science)].
@@ -494,7 +491,9 @@ Model Collaborative Filtering memprediksi preferensi pengguna terhadap produk be
 1. **Generating Recommendations**: Tahap ini menunjukkan proses utama menghasilkan rekomendasi untuk pengguna spesifik. Model menggunakan embedding yang dipelajari untuk memprediksi rating produk yang belum diulas, lalu menampilkan produk dengan prediksi rating tertinggi. Output dari proses ini dapat dilihat pada Tabel 5, yang menampilkan contoh 10 produk teratas yang direkomendasikan untuk seorang pengguna sampel, lengkap dengan detail nama dan kategori produk.
 
 Tabel 5. Top 10 Rekomendasi Produk Berdasarkan Model Collaborative Filtering
-Recommendations for user AHXVJ4RECEDVRCX2R7BYOMRO7KJQ,AEUNZGZ7IQFCJEFHU647HB57FC2Q,AEUWYI55HVW2GO4GRLWK4PWCTPLQ,AEDRDM7OTIWIAOWELAEAITODC4EA,AEDZ4OLR66LZO57XWMR6F43K736A,AEIXRXVWCR62IELG44BI5F7ZZUSQ,AFMCGE5U34NNKT2AGRY5TPX4OHKQ,AEFVX5GYQ6Y5MQSA25IP2FM2ZKTA:
+
+Recommendations for user 
+AHXVJ4RECEDVRCX2R7BYOMRO7KJQ,AEUNZGZ7IQFCJEFHU647HB57FC2Q,AEUWYI55HVW2GO4GRLWK4PWCTPLQ,AEDRDM7OTIWIAOWELAEAITODC4EA,AEDZ4OLR66LZO57XWMR6F43K736A,AEIXRXVWCR62IELG44BI5F7ZZUSQ,AFMCGE5U34NNKT2AGRY5TPX4OHKQ,AEFVX5GYQ6Y5MQSA25IP2FM2ZKTA:
 
 | product_id | product_name                                                   | category                                                            | sub_category         |
 |------------|----------------------------------------------------------------|---------------------------------------------------------------------|----------------------|
@@ -537,29 +536,21 @@ Tabel 7. Top 10 Rekomendasi Produk
 
 
 *   **Kelebihan Pendekatan Collaborative Filtering: [[7](https://leravio.com/blog/collaborative-filtering-pengertian-kelebihan-dan-cara-kerjanya/)]**
-    *   **Menemukan Pola Tersembunyi:** Mampu menemukan hubungan antar item atau pengguna yang tidak jelas dari fitur konten saja (misalnya, merekomendasikan item yang berbeda kategori tapi sering dibeli bersama).
-    *   **Serendipity:** Dapat merekomendasikan item yang mungkin tidak diduga oleh pengguna tetapi disukai oleh pengguna lain dengan selera serupa.
-    *   **Tidak Bergantung pada Konten:** Bekerja baik bahkan jika informasi konten produk minimal atau sulit diekstraksi.
-Tidak membutuhkan informasi tentang item
-Karena Collaborative Filtering hanya bergantung pada perilaku pengguna (seperti rating atau riwayat pembelian), sistem ini tidak membutuhkan data tambahan seperti deskripsi produk atau genre film.
-Mampu menemukan pola tersembunyi
-Teknik ini dapat menemukan hubungan atau kesamaan yang tidak langsung terlihat antara pengguna dan item.\
+    *   Penemuan Pola Tersembunyi: Mengidentifikasi hubungan non-intuitif antar item (misal: produk dari kategori berbeda yang sering dibeli bersama) dan Menangkap preferensi implisit pengguna yang tidak terlihat dari metadata produk.
+    *   Meningkatkan Serendipity: Memungkinkan rekomendasi yang mengejutkan namun relevan berdasarkan Perilaku pengguna dengan profil serupa dan Pola co-purchasing/co-viewing.
+    *   Independensi dari Konten Produk: Tetap efektif meskipun Deskripsi produk minim, Metadata tidak terstruktur, dan Konten sulit dianalisis (misal: produk kreatif/subjektif).
+    *   Adaptabilitas Dinamis: Secara otomatis menyesuaikan dengan Perubahan tren pasar, Evolusi preferensi pengguna, dan Musim atau event khusus.
 
 
 *   **Kekurangan Pendekatan Collaborative Filtering: [[7](https://leravio.com/blog/collaborative-filtering-pengertian-kelebihan-dan-cara-kerjanya/)]**
-    *   **Cold Start Problem:** Sulit memberikan rekomendasi yang akurat untuk pengguna baru (yang belum memiliki interaksi cukup) atau produk baru (yang belum memiliki rating).
-    *   **Membutuhkan Data Interaksi yang Cukup:** Kinerja sangat bergantung pada ketersediaan data rating atau interaksi pengguna.
-    *   **Masalah Sparsity Data:** Jika data interaksi sangat jarang, model mungkin sulit menemukan pola yang kuat.
-    *   **Kurang dalam Penjelasan:** Sulit menjelaskan *mengapa* suatu item direkomendasikan kepada pengguna secara intuitif.
+    *   Cold Start Problem: Tantangan utama pada skenario Pengguna baru yaitu Minim data interaksi dan Item baru sehingga Belum ada riwayat rating.
+    *   Solusi potensial dengan Hybrid dengan content-based dan Demographic filtering awal.
+    *   Ketergantungan Data Interaksi: Membutuhkan volume signifikan untuk User-user similarity (min. 20 interaksi/user) dan Item-item correlation (min. 50 interaksi/item).
+    *   Data Sparsity: Masalah umum ketika Rasio interaksi/katalog < 0.1% dan Distribusi interaksi sangat skewed. Sehingga dampak yang terjadi yaitu akurasi menurun dan coverage terbatas.
+    *   Black Box Effect: Kesulitan dalam Explainability rekomendasi, Debugging bias, dan Compliance regulasi.
+    *   Vulnerabilitas Manipulasi: Risiko yaitu Shilling attacks, Viral bias, dan Amplifikasi popularitas.
 
-Cold Start Problem
-Sistem kesulitan memberikan rekomendasi kepada pengguna baru (yang belum punya cukup data) atau item baru (yang belum pernah dinilai).
-Sparsity Problem
-Dalam dataset yang besar, sebagian besar pengguna hanya berinteraksi dengan sebagian kecil item, sehingga data menjadi jarang dan rekomendasi menjadi kurang akurat.
-
-
-
-
+---
 Dengan mengimplementasikan kedua pendekatan ini, sistem rekomendasi yang dibangun menawarkan solusi yang komprehensif, memanfaatkan baik informasi konten produk maupun pola perilaku pengguna, untuk memberikan rekomendasi yang relevan dan personal.
 
 
@@ -569,25 +560,19 @@ Tahap evaluasi bertujuan untuk mengukur kinerja model sistem rekomendasi yang te
 
 
 ### Root Mean Squared Error (RMSE)
-Root Mean Square Error (RMSE) merupakan besarnya tingkat kesalahan hasil prediksi, dimana semakin kecil (mendekati 0) nilai RMSE maka hasil prediksi akan semakin akurat. Root Mean Squared Error (RMSE) merupakan salah satu cara untuk mengevaluasi model regresi linear dengan mengukur tingkat akurasi hasil perkiraan suatu model. RMSE dihitung dengan mengkuadratkan error (prediksi “ observasi) dibagi dengan jumlah data (= rata-rata), lalu diakarkan. RMSE tidak memiliki satuan. Root Mean Square Error merupakan salah satu kriteria dalam menentukan model peramalan selain MAPE, MAD dan MSE. Nilai RMSE rendah menunjukkan bahwa variasi nilai yang dihasilkan oleh suatu model prakiraan mendekati variasi nilai observasinya. RMSE menghitung seberapa berbedanya seperangkat nilai. Semakin kecil nilai RMSE, semakin dekat nilai yang diprediksi dan diamati [[8](https://dqlab.id/kriteria-jenis-teknik-analisis-data-dalam-forecasting)].
+Root Mean Squared Error (RMSE) merupakan salah satu cara untuk mengevaluasi model regresi linear dengan mengukur tingkat akurasi hasil perkiraan suatu model. RMSE dihitung dengan mengkuadratkan error (prediksi “ observasi) dibagi dengan jumlah data (= rata-rata), lalu diakarkan. RMSE tidak memiliki satuan. Root Mean Square Error merupakan salah satu kriteria dalam menentukan model peramalan selain MAPE, MAD dan MSE. Nilai RMSE rendah menunjukkan bahwa variasi nilai yang dihasilkan oleh suatu model prakiraan mendekati variasi nilai observasinya. RMSE menghitung seberapa berbedanya seperangkat nilai. Semakin kecil nilai RMSE, semakin dekat nilai yang diprediksi dan diamati [[8](https://dqlab.id/kriteria-jenis-teknik-analisis-data-dalam-forecasting)].
 
 
 $$
 \text{RMSE} = \sqrt{ \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2 }
 $$
 
+Dimana:
+$$y_i$$ adalah nilai aktual ke-i, 
+$$\hat{y}_i$$ adalah nilai prediksi ke-i, 
+$$n$$ adalah jumlah total data.
 
-$$
-\text{RMSE} = \sqrt{ \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2 }
-$$
-
-\text{di mana:} \\
-y_i \text{ adalah nilai aktual ke-}i, \\
-\hat{y}_i \text{ adalah nilai prediksi ke-}i, \\
-n \text{ adalah jumlah total data.} \\
-\\
-\text{RMSE mengukur rata-rata kesalahan kuadrat antara nilai aktual dan prediksi,} \\
-\text{yang kemudian diakarkan untuk mendapatkan nilai dalam satuan yang sama dengan data asli.}
+RMSE mengukur rata-rata kesalahan kuadrat antara nilai aktual dan prediksi, yang kemudian diakarkan untuk mendapatkan nilai dalam satuan yang sama dengan data asli.
 
 
 *   **Cara Kerja:**
@@ -601,10 +586,10 @@ $$
 \text{Loss} = -\frac{1}{n} \sum_{i=1}^{n} \left( y_i \log(\hat{y}_i) + (1 - y_i) \log(1 - \hat{y}_i) \right)
 $$
 
-di mana:  
-\( n \) adalah jumlah data,  
-\( y_i \) adalah nilai aktual (0 atau 1),  
-\( \hat{y}_i \) adalah nilai prediksi (nilai probabilitas antara 0 dan 1).
+Dimana:
+$$n$$ adalah jumlah data, 
+$$y_i$$ adalah nilai aktual (0 atau 1), 
+$$\hat{y}_i$$ adalah nilai prediksi (nilai probabilitas antara 0 dan 1).
 
 
 *   **Cara Kerja:**
@@ -634,7 +619,6 @@ Interpretasi hasil ini menunjukkan bahwa model Collaborative Filtering yang diba
 Untuk model Content-Based Filtering, evaluasi kualitatif dilakukan dengan memeriksa relevansi Top-N rekomendasi yang dihasilkan. Berdasarkan contoh output yang ditampilkan, model Content-Based berhasil merekomendasikan produk-produk yang memiliki kemiripan konten (nama, kategori, deskripsi) dengan produk referensi, yang sesuai dengan tujuan pendekatan ini. Metrik kuantitatif seperti Precision, Recall, atau F1-Score pada Top-N rekomendasi juga dapat digunakan untuk evaluasi yang lebih formal jika data interaksi biner (misalnya, 'klik' atau 'pembelian') tersedia dan relevan. Namun, dalam konteks dataset rating, pemeriksaan relevansi visual dari output rekomendasi adalah cara evaluasi yang umum dan memadai untuk menunjukkan fungsi model.
 
 ## Kesimpulan
-# Conclusion
 
 Proyek ini berhasil membangun sistem rekomendasi produk menggunakan dataset penjualan dan ulasan dari Amazon dengan menerapkan dua pendekatan utama: Content-Based Filtering dan Collaborative Filtering. Melalui serangkaian tahapan yang komprehensif, mulai dari pemuatan dan pemahaman data hingga pemodelan dan evaluasi, sistem ini menunjukkan potensi untuk mengatasi masalah *information overload* di platform e-commerce.
 
@@ -654,13 +638,21 @@ Secara keseluruhan, proyek ini berhasil membangun fondasi yang kuat untuk sistem
 ## Referensi
 
 [1] Y. Prayuti, “Dinamika perlindungan hukum konsumen di era digital: Analisis hukum terhadap praktik e-commerce dan perlindungan data konsumen di Indonesia,” *Jurnal Interpretasi Hukum*, vol. 5, no. 1, pp. 903–913, 2024.
+
 [2] A. Nurcahyadi, “Peran Content Marketing dalam Meningkatkan Loyalitas Pelanggan pada E-Commerce,” *Mutiara: Multidiciplinary Scientific Journal*, vol. 2, no. 7, pp. 632–639, 2024.
+
 [3] Alphasoft, “Apa Manfaat Penggunaan Sistem E-Commerce Bagi Peningkatan Penjualan,” *Alphasoft Blog*, [Online]. Available: https://alphasoft.id/blog/bisnis-5/apa-manfaat-penggunaan-sistem-e-commerce-bagi-peningkatan-penjualan-146. [Accessed: 27-May-2025].
+
 [4] DQLab, “Content-Based Filtering dalam Algoritma Data Science,” *DQLab*, [Online]. Available: https://dqlab.id/content-based-filtering-dalam-algoritma-data-science. [Accessed: 27-May-2025].
+
 [5] BINUS MTI, “Sistem Rekomendasi dengan Content-Based,” *Program Studi Magister Teknik Informatika BINUS*, [Online]. Available: https://mti.binus.ac.id/2023/05/31/sistem-rekomendasi-dengan-content-based/. [Accessed: 27-May-2025].
+
 [6] DQLab, “Collaborative Filtering pada Algoritma Data Science,” *DQLab*, [Online]. Available: https://dqlab.id/collaborative-filtering-pada-algoritma-data-science. [Accessed: 27-May-2025].
+
 [7] Leravio, “Collaborative Filtering: Pengertian, Kelebihan, dan Cara Kerjanya,” *Leravio Blog*, [Online]. Available: https://leravio.com/blog/collaborative-filtering-pengertian-kelebihan-dan-cara-kerjanya/. [Accessed: 27-May-2025].
+
 [8] DQLab, “Kriteria, Jenis, Teknik Analisis Data dalam Forecasting,” *DQLab*, [Online]. Available: https://dqlab.id/kriteria-jenis-teknik-analisis-data-dalam-forecasting. [Accessed: 27-May-2025].
+
 [9] R. Mulyawan, “Loss Function,” *Rifqi Mulyawan Blog*, [Online]. Available: https://rifqimulyawan.com/kamus/loss-function/. [Accessed: 27-May-2025].
 
 
