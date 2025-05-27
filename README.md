@@ -653,11 +653,18 @@ Secara keseluruhan, proyek ini berhasil membangun fondasi yang kuat untuk sistem
 
 ## Referensi
 
+[1] Y. Prayuti, “Dinamika perlindungan hukum konsumen di era digital: Analisis hukum terhadap praktik e-commerce dan perlindungan data konsumen di Indonesia,” *Jurnal Interpretasi Hukum*, vol. 5, no. 1, pp. 903–913, 2024.
+[2] A. Nurcahyadi, “Peran Content Marketing dalam Meningkatkan Loyalitas Pelanggan pada E-Commerce,” *Mutiara: Multidiciplinary Scientific Journal*, vol. 2, no. 7, pp. 632–639, 2024.
+[3] Alphasoft, “Apa Manfaat Penggunaan Sistem E-Commerce Bagi Peningkatan Penjualan,” *Alphasoft Blog*, [Online]. Available: https://alphasoft.id/blog/bisnis-5/apa-manfaat-penggunaan-sistem-e-commerce-bagi-peningkatan-penjualan-146. [Accessed: 27-May-2025].
+[4] DQLab, “Content-Based Filtering dalam Algoritma Data Science,” *DQLab*, [Online]. Available: https://dqlab.id/content-based-filtering-dalam-algoritma-data-science. [Accessed: 27-May-2025].
+[5] BINUS MTI, “Sistem Rekomendasi dengan Content-Based,” *Program Studi Magister Teknik Informatika BINUS*, [Online]. Available: https://mti.binus.ac.id/2023/05/31/sistem-rekomendasi-dengan-content-based/. [Accessed: 27-May-2025].
+[6] DQLab, “Collaborative Filtering pada Algoritma Data Science,” *DQLab*, [Online]. Available: https://dqlab.id/collaborative-filtering-pada-algoritma-data-science. [Accessed: 27-May-2025].
+[7] Leravio, “Collaborative Filtering: Pengertian, Kelebihan, dan Cara Kerjanya,” *Leravio Blog*, [Online]. Available: https://leravio.com/blog/collaborative-filtering-pengertian-kelebihan-dan-cara-kerjanya/. [Accessed: 27-May-2025].
+[8] DQLab, “Kriteria, Jenis, Teknik Analisis Data dalam Forecasting,” *DQLab*, [Online]. Available: https://dqlab.id/kriteria-jenis-teknik-analisis-data-dalam-forecasting. [Accessed: 27-May-2025].
+[9] R. Mulyawan, “Loss Function,” *Rifqi Mulyawan Blog*, [Online]. Available: https://rifqimulyawan.com/kamus/loss-function/. [Accessed: 27-May-2025].
+
+
 **---Ini adalah bagian akhir laporan---**
 
-
-_Catatan:_
-- _Anda dapat menambahkan gambar, kode, atau tabel ke dalam laporan jika diperlukan. Temukan caranya pada contoh dokumen markdown di situs editor [Dillinger](https://dillinger.io/), [Github Guides: Mastering markdown](https://guides.github.com/features/mastering-markdown/), atau sumber lain di internet. Semangat!_
-- Jika terdapat penjelasan yang harus menyertakan code snippet, tuliskan dengan sewajarnya. Tidak perlu menuliskan keseluruhan kode project, cukup bagian yang ingin dijelaskan saja.
 
 
