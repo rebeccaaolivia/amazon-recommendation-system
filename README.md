@@ -568,9 +568,9 @@ $$
 $$
 
 Dimana:
-$$y_i$$ adalah nilai aktual ke-i, 
-$$\hat{y}_i$$ adalah nilai prediksi ke-i, 
-$$n$$ adalah jumlah total data.
+* $$y_i$$ adalah nilai aktual ke-i, 
+* $$\hat{y}_i$$ adalah nilai prediksi ke-i, 
+* $$n$$ adalah jumlah total data.
 
 RMSE mengukur rata-rata kesalahan kuadrat antara nilai aktual dan prediksi, yang kemudian diakarkan untuk mendapatkan nilai dalam satuan yang sama dengan data asli.
 
@@ -587,9 +587,9 @@ $$
 $$
 
 Dimana:
-$$n$$ adalah jumlah data, 
-$$y_i$$ adalah nilai aktual (0 atau 1), 
-$$\hat{y}_i$$ adalah nilai prediksi (nilai probabilitas antara 0 dan 1).
+* $$n$$ adalah jumlah data, 
+* $$y_i$$ adalah nilai aktual (0 atau 1), 
+* $$\hat{y}_i$$ adalah nilai prediksi (nilai probabilitas antara 0 dan 1).
 
 
 *   **Cara Kerja:**
