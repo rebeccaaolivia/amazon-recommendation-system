@@ -475,7 +475,6 @@ Collaborative Filtering adalah salah satu algoritma dalam data science yang digu
 <p align="center"><strong>Gambar 8.</strong> Collaborative Filtering</p>
 
 
-
 Model Collaborative Filtering memprediksi preferensi pengguna terhadap produk berdasarkan pola interaksi (rating) dari banyak pengguna.
 
 *   **Teknik yang Digunakan:**
@@ -577,24 +576,36 @@ $$
 \text{RMSE} = \sqrt{ \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2 }
 $$
 
-*   **Formula:**
-    $$ RMSE = \sqrt{\frac{1}{N} \sum_{i=1}^{N} (y_i - \hat{y}_i)^2} $$
-    Dimana:
-    *   $N$ adalah jumlah sampel data (misalnya, jumlah rating pada data validasi).
-    *   $y_i$ adalah nilai aktual (rating yang dinormalisasi) untuk sampel ke-$i$.
-    *   $\hat{y}_i$ adalah nilai prediksi (rating yang dinormalisasi) oleh model untuk sampel ke-$i$.
+
+$$
+\text{RMSE} = \sqrt{ \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2 }
+$$
+
+\text{di mana:} \\
+y_i \text{ adalah nilai aktual ke-}i, \\
+\hat{y}_i \text{ adalah nilai prediksi ke-}i, \\
+n \text{ adalah jumlah total data.} \\
+\\
+\text{RMSE mengukur rata-rata kesalahan kuadrat antara nilai aktual dan prediksi,} \\
+\text{yang kemudian diakarkan untuk mendapatkan nilai dalam satuan yang sama dengan data asli.}
+
 
 *   **Cara Kerja:**
     RMSE mengukur rata-rata akar kuadrat dari perbedaan antara nilai prediksi dan nilai aktual. Metrik ini memberikan indikasi seberapa besar kesalahan prediksi model secara rata-rata. Nilai RMSE yang lebih rendah menunjukkan bahwa prediksi model lebih dekat dengan nilai aktual, yang berarti model memiliki kinerja yang lebih baik dalam memprediksi rating. Karena kuadrat dari perbedaan diambil, kesalahan yang besar akan memiliki dampak yang lebih signifikan pada RMSE dibandingkan kesalahan yang kecil.
 
 ### Binary Crossentropy (Loss Function)
 
-*   **Formula (untuk satu sampel):**
-    $$ L(y, \hat{y}) = -[y \log(\hat{y}) + (1 - y) \log(1 - \hat{y})] $$
-    Dimana:
-    *   $y$ adalah nilai target aktual (rating yang dinormalisasi, berkisar 0 atau 1, meskipun dalam kasus ini menggunakan nilai float antara 0-1 setelah normalisasi rating).
-    *   $\hat{y}$ adalah nilai prediksi model (output dari aktivasi sigmoid, berkisar antara 0 dan 1).
-    Untuk rata-rata *loss* di seluruh batch/dataset, nilai ini dihitung untuk setiap sampel dan kemudian dirata-ratakan.
+Binary Cross-Entropy Loss digunakan untuk menghitung Loss Function pada model yang melakukan klasifikasi biner [[9](https://rifqimulyawan.com/kamus/loss-function/)]. Rumus ini dinyatakan sebagai:
+
+$$
+\text{Loss} = -\frac{1}{n} \sum_{i=1}^{n} \left( y_i \log(\hat{y}_i) + (1 - y_i) \log(1 - \hat{y}_i) \right)
+$$
+
+di mana:  
+\( n \) adalah jumlah data,  
+\( y_i \) adalah nilai aktual (0 atau 1),  
+\( \hat{y}_i \) adalah nilai prediksi (nilai probabilitas antara 0 dan 1).
+
 
 *   **Cara Kerja:**
     Binary Crossentropy adalah *loss function* yang digunakan selama proses pelatihan model. Meskipun bukan metrik evaluasi *stand-alone* untuk mengukur kinerja akhir model dalam konteks prediksi rating numerik (RMSE lebih cocok untuk itu), nilai *loss* pada data validasi (`val_loss`) penting untuk memantau konvergensi model dan mendeteksi *overfitting*. Model berusaha meminimalkan nilai Binary Crossentropy selama pelatihan. Nilai *loss* yang menurun pada data validasi menunjukkan bahwa model semakin baik dalam memprediksi probabilitas atau nilai target yang dinormalisasi.
@@ -611,12 +622,34 @@ Pada model Collaborative Filtering (RecommenderNet), kinerja model dievaluasi me
     *   Training RMSE: Sekitar 0.1393
     *   Validation RMSE: Sekitar 0.1722 (Perlu dicatat bahwa *Early Stopping* mengembalikan bobot terbaik, yang mungkin sesuai dengan epoch sebelum epoch terakhir yang ditampilkan jika *validation error* sempat naik kembali). Berdasarkan output tuning, nilai terbaik yang tercatat adalah **0.1278**.
 
-Interpretasi hasil ini menunjukkan bahwa model Collaborative Filtering yang dibangun mampu memprediksi rating produk dengan tingkat kesalahan rata-rata yang relatif rendah pada data validasi (sekitar 0.1278 - 0.1722 pada skala rating 0-1 setelah normalisasi). Nilai RMSE yang lebih rendah mengindikasikan prediksi yang lebih akurat, yang merupakan indikator baik untuk sistem rekomendasi berbasis prediksi rating.
+Interpretasi hasil ini menunjukkan bahwa model Collaborative Filtering yang dibangun mampu memprediksi rating produk dengan tingkat kesalahan rata-rata yang relatif rendah pada data validasi (sekitar  0.1253 - 0.1722 pada skala rating 0-1 setelah normalisasi). Nilai RMSE yang lebih rendah mengindikasikan prediksi yang lebih akurat, yang merupakan indikator baik untuk sistem rekomendasi berbasis prediksi rating.
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/27a3e708-4e1e-459c-85e5-8beae8d89263" alt="Gambar 9. Visualisasi Proses Pelatihan" width="500"/>
+</p>
+
+<p align="center"><strong>Gambar 9.</strong> Visualisasi Proses Pelatihan</p>
+
 
 Untuk model Content-Based Filtering, evaluasi kualitatif dilakukan dengan memeriksa relevansi Top-N rekomendasi yang dihasilkan. Berdasarkan contoh output yang ditampilkan, model Content-Based berhasil merekomendasikan produk-produk yang memiliki kemiripan konten (nama, kategori, deskripsi) dengan produk referensi, yang sesuai dengan tujuan pendekatan ini. Metrik kuantitatif seperti Precision, Recall, atau F1-Score pada Top-N rekomendasi juga dapat digunakan untuk evaluasi yang lebih formal jika data interaksi biner (misalnya, 'klik' atau 'pembelian') tersedia dan relevan. Namun, dalam konteks dataset rating, pemeriksaan relevansi visual dari output rekomendasi adalah cara evaluasi yang umum dan memadai untuk menunjukkan fungsi model.
 
 ## Kesimpulan
+# Conclusion
 
+Proyek ini berhasil membangun sistem rekomendasi produk menggunakan dataset penjualan dan ulasan dari Amazon dengan menerapkan dua pendekatan utama: Content-Based Filtering dan Collaborative Filtering. Melalui serangkaian tahapan yang komprehensif, mulai dari pemuatan dan pemahaman data hingga pemodelan dan evaluasi, sistem ini menunjukkan potensi untuk mengatasi masalah *information overload* di platform e-commerce.
+
+Tahap **Data Understanding** memberikan wawasan penting mengenai struktur, kualitas, dan karakteristik data, termasuk distribusi kategori produk, rata-rata rating, dan pola diskon. Identifikasi nilai yang hilang dan tidak konsisten, serta pembersihan data yang dilakukan, memastikan dataset siap untuk pemodelan. Analisis distribusi rating dan diskon per kategori/sub-kategori juga memberikan *insight* berharga mengenai preferensi pengguna dan strategi promosi.
+
+Pada tahap **Data Preparation**, data disiapkan melalui seleksi fitur yang relevan, penggabungan teks untuk fitur konten, dan vektorisasi teks menggunakan TF-IDF. Untuk model Collaborative Filtering, *user* dan *product ID* di-*encode* dan rating dinormalisasi, mempersiapkan data untuk input model berbasis neural network.
+
+Dua model utama berhasil diimplementasikan:
+
+1.  **Content-Based Filtering:** Model ini memanfaatkan representasi TF-IDF dari konten produk (nama, kategori, deskripsi, ulasan) dan menghitung Cosine Similarity untuk mengukur kemiripan antar item. Model ini efektif dalam merekomendasikan produk yang secara konten sangat mirip dengan produk yang diminati pengguna. Keunggulannya terletak pada kemampuannya merekomendasikan item baru dan transparansi rekomendasi, meskipun rentan terhadap *filter bubble*.
+2.  **Collaborative Filtering:** Menggunakan pendekatan Model-Based dengan arsitektur neural network (RecommenderNet), model ini mempelajari *embedding* pengguna dan produk dari data rating untuk memprediksi potensi rating. Setelah melalui proses *hyperparameter tuning* dan pelatihan, model ini mampu memprediksi rating dengan Validation RMSE yang rendah (sekitar 0.1278), menunjukkan akurasi yang baik dalam memprediksi preferensi pengguna pada data yang belum pernah dilihat. Model ini unggul dalam menemukan pola tersembunyi dan memberikan rekomendasi *serendipitous*, namun menghadapi tantangan *cold start* untuk pengguna dan item baru.
+
+**Evaluasi** model Collaborative Filtering menunjukkan kinerja yang baik dalam memprediksi rating, dengan RMSE sebagai metrik utama yang mengukur tingkat kesalahan prediksi. Visualisasi proses pelatihan juga membantu memantau konvergensi dan mendeteksi potensi *overfitting*. Sementara itu, evaluasi kualitatif pada model Content-Based Filtering melalui contoh Top-N rekomendasi menunjukkan bahwa model berhasil mengidentifikasi produk serupa berdasarkan kontennya.
+
+Secara keseluruhan, proyek ini berhasil membangun fondasi yang kuat untuk sistem rekomendasi produk. Kedua pendekatan model yang diimplementasikan menawarkan cara yang berbeda namun saling melengkapi untuk merekomendasikan produk, yang dapat diintegrasikan atau digunakan secara terpisah tergantung pada skenario penggunaan. Hasil proyek ini memberikan bukti bahwa data interaksi dan konten produk dapat secara efektif dimanfaatkan untuk meningkatkan pengalaman pengguna dan potensi penjualan di platform e-commerce.
 
 ## Referensi
 
