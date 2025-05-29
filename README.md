@@ -254,7 +254,7 @@ Seluruh tahapan EDA ini memberikan pemahaman yang komprehensif tentang karakteri
 
 ## Data Preparation
 
-Pada tahap ini, data disiapkan agar bisa digunakan dalam proses machine learning atau analisis lanjutan. Langkah-langkah yang dilakukan meliputi: seleksi fitur, penggabungan teks, dan vektorisasi teks menggunakan TF-IDF.
+Pada tahap ini, data disiapkan agar bisa digunakan dalam proses machine learning atau analisis lanjutan. Langkah-langkah yang dilakukan meliputi: seleksi fitur, penggabungan teks, dan vektorisasi teks menggunakan TF-IDF (untuk Content-Based Filtering), serta langkah-langkah spesifik untuk Collaborative Filtering.
 
 ### Data Cleaning
 
@@ -373,6 +373,28 @@ Output dari proses ini adalah matriks TF-IDF (`tfidf_matrix` atau `tfidf_matrix_
 Alasan mengapa vektorisasi teks dengan TF-IDF diperlukan adalah untuk:
 *   Mengubah data teks yang tidak terstruktur menjadi format numerik yang dapat diproses oleh algoritma machine learning.
 *   Menangkap pentingnya kata kunci dalam setiap produk, yang akan digunakan sebagai dasar untuk menghitung kemiripan konten antar produk.
+
+---
+
+## Persiapan Data untuk Collaborative Filtering
+
+Bagian ini menjelaskan langkah-langkah spesifik yang dilakukan untuk menyiapkan data rating agar bisa digunakan dalam membangun model Collaborative Filtering berbasis Neural Network (RecommenderNet).
+
+1.  **Pemilihan Data Rating:**
+    Langkah pertama adalah memfilter dataset utama (`amazon`) untuk hanya mengambil kolom-kolom yang relevan untuk model Collaborative Filtering, yaitu `user_id`, `product_id`, dan `rating`. Data ini disimpan dalam DataFrame baru (misalnya, `rating_data`). Ini adalah data interaksi pengguna dengan produk yang akan dipelajari oleh model.
+
+2.  **Encoding ID Pengguna dan Produk:**
+    Model neural network membutuhkan input dalam bentuk indeks numerik. Oleh karena itu, `user_id` dan `product_id` yang awalnya berupa string unik diubah menjadi representasi numerik (indeks) yang berurutan (misalnya, 0, 1, 2, ...). Proses ini melibatkan pembuatan daftar ID unik untuk pengguna dan produk, lalu membuat kamus (dictionary) untuk memetakan ID asli ke indeks numerik, dan sebaliknya. Kolom-kolom baru (`user_encoded`, `product_encoded`) ditambahkan ke DataFrame data rating untuk menyimpan indeks ini.
+
+3.  **Normalisasi Nilai Rating:**
+    Nilai rating asli dalam dataset memiliki rentang tertentu (misalnya, dari 2.0 hingga 5.0). Untuk model neural network yang menggunakan fungsi aktivasi Sigmoid pada lapisan outputnya (Sigmoid menghasilkan nilai antara 0 dan 1), nilai rating target perlu dinormalisasi ke dalam rentang yang sama. Normalisasi Min-Max (`(rating - min_rating) / (max_rating - min_rating)`) digunakan untuk mengubah rating asli menjadi nilai antara 0 dan 1. Kolom baru (`normalized_rating`) ditambahkan ke DataFrame data rating untuk menyimpan nilai yang sudah dinormalisasi ini.
+
+4.  **Pembagian Dataset (Train-Validation Split):**
+    Data rating yang sudah disiapkan (dengan kolom `user_encoded`, `product_encoded`, dan `normalized_rating`) kemudian dibagi menjadi dua set: data latih (training set) dan data validasi (validation set). Umumnya, data dibagi dengan proporsi tertentu (misalnya, 80% untuk training dan 20% untuk validation). Data training digunakan untuk melatih model, sedangkan data validation digunakan untuk mengevaluasi kinerja model selama pelatihan dan menyetel hyperparameter. Pembagian ini penting untuk memastikan bahwa model dapat menggeneralisasi dengan baik ke data baru dan mencegah *overfitting*.
+
+Alasan mengapa langkah-langkah persiapan data khusus ini diperlukan untuk Collaborative Filtering adalah untuk:
+* Menyediakan data interaksi pengguna-produk dalam format yang sesuai (indeks numerik dan rating ternormalisasi) sebagai input untuk arsitektur neural network.
+* Mempersiapkan data untuk proses pelatihan model yang efisien dan efektif, serta memungkinkan evaluasi yang objektif terhadap kinerja model pada data yang belum pernah dilihat.
 
 
 ## Modeling and Result
