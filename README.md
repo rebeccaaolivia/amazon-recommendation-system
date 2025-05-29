@@ -422,11 +422,11 @@ Content-based filtering adalah metode yang digunakan dalam sistem rekomendasi da
 Model Content-Based Filtering merekomendasikan produk berdasarkan kemiripan konten antar produk.
 
 *   **Teknik yang Digunakan:**
-    *   **TF-IDF (Term Frequency-Inverse Document Frequency):** Digunakan untuk mengubah teks gabungan dari fitur produk (`product_name`, `category`, `about_product`, `review_content`) menjadi representasi numerik dalam bentuk matriks TF-IDF. Matriks ini memiliki bentuk (jumlah produk unik, jumlah fitur teks), di mana setiap nilai merepresentasikan pentingnya sebuah kata dalam sebuah produk relatif terhadap seluruh dataset.
-    *   **Cosine Similarity:** Setelah matriks TF-IDF diperoleh, Cosine Similarity dihitung antara semua pasangan produk. Hasilnya adalah matriks persegi (jumlah produk unik x jumlah produk unik) yang menyimpan skor kemiripan konten antara setiap produk dengan produk lainnya.
+    *   **Representasi Fitur Teks:** Produk direpresentasikan dalam bentuk numerik berdasarkan konten tekstualnya (nama produk, kategori, deskripsi, ulasan). Proses ini telah dijelaskan secara rinci pada bagian **Data Preparation** di sub-judul **"Vektorisasi Teks: TF-IDF (untuk Content-Based Filtering)"**.
+    *   **Cosine Similarity:** Setelah produk direpresentasikan dalam bentuk numerik, Cosine Similarity dihitung antara semua pasangan produk. Hasilnya adalah matriks persegi (jumlah produk unik x jumlah produk unik) yang menyimpan skor kemiripan konten antara setiap produk dengan produk lainnya.
 
 *   **Cara Kerja Model:**
-    Ketika pengguna melihat atau berinteraksi dengan suatu produk, model akan menggunakan matriks Cosine Similarity untuk mencari produk lain yang memiliki skor kemiripan tertinggi dengan produk tersebut. Produk-produk dengan skor kemiripan tertinggi (dan belum pernah dilihat/diulas oleh pengguna) akan direkomendasikan.
+    Ketika pengguna melihat atau berinteraksi dengan suatu produk, model akan menggunakan matriks Cosine Similarity (yang dihitung berdasarkan representasi numerik produk dari tahapan Data Preparation) untuk mencari produk lain yang memiliki skor kemiripan tertinggi dengan produk tersebut. Produk-produk dengan skor kemiripan tertinggi (dan belum pernah dilihat/diulas oleh pengguna) akan direkomendasikan.
 
 *   **Output Top-N Recommendation:**
     Model ini menghasilkan daftar Top-N rekomendasi produk yang paling mirip secara konten dengan produk referensi. Contoh output rekomendasi berdasarkan nama produk atau product ID telah ditampilkan di notebook, menunjukkan produk-produk dengan kategori atau deskripsi yang serupa. Dilakukan Rekomendasi Berdasarkan Nama Produk dan Rekomendasi Berdasarkan Product diproleh saat melakukan Testing Rekomendasi
