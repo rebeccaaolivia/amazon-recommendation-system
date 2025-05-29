@@ -376,7 +376,7 @@ Alasan mengapa vektorisasi teks dengan TF-IDF diperlukan adalah untuk:
 
 ---
 
-## Persiapan Data untuk Collaborative Filtering
+### Persiapan Data untuk Collaborative Filtering
 
 Bagian ini menjelaskan langkah-langkah spesifik yang dilakukan untuk menyiapkan data rating agar bisa digunakan dalam membangun model Collaborative Filtering berbasis Neural Network (RecommenderNet).
 
