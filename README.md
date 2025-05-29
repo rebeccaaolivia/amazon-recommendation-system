@@ -133,11 +133,6 @@ Dataset ini terdiri dari 16 kolom dengan rincian sebagai berikut:
 15. **`img_link`** (object): Tautan (URL) ke gambar produk.
 16. **`product_link`** (object): Tautan (URL) ke halaman produk di Amazon.
 
-Selain itu, telah ditambahkan kolom baru sebagai hasil *feature engineering* awal:
-*   **`rating_weighted`** (float64): Nilai rating yang diberi bobot berdasarkan jumlah ulasan (`rating` \* `rating_count`).
-*   **`main_category`** (object): Kategori utama produk, diekstrak dari kolom `category`.
-*   **`sub_category`** (object): Sub-kategori produk, diekstrak dari kolom `category`.
-*   **`combined_text` / `all_text_features`** (object): Gabungan teks dari kolom `product_name`, `category`, `about_product`, dan `review_content` untuk keperluan analisis teks.
 
 ### Exploratory Data Analysis (EDA) dan Insights
 
@@ -336,6 +331,18 @@ Name: count, dtype: int64
 
 Nilai yang tidak valid (misalnya `'|'`) dihapus agar tidak mempengaruhi analisis. Setelah proses pembersihan ini selesai dan pola data dapat dipahami dengan lebih baik, maka proses seleksi fitur, *encoding*, dan pengembangan model dapat dilanjutkan.
 
+### Feature Engineering
+Setelah proses *data cleaning*, beberapa kolom baru dibuat untuk menambah informasi penting yang dapat digunakan dalam analisis dan modeling:
+*   **`rating_weighted`** (float64): Nilai rating yang diberi bobot berdasarkan jumlah ulasan (`rating` \* `rating_count`).
+*   **`main_category`** (object): Kategori utama produk, diekstrak dari kolom `category`.
+*   **`sub_category`** (object): Sub-kategori produk, diekstrak dari kolom `category`.
+*   **`combined_text` / `all_text_features`** (object): Gabungan teks dari kolom `product_name`, `category`, `about_product`, dan `review_content` untuk keperluan analisis teks.
+
+Feature-feature ini membantu sistem dalam:
+
+*   Menilai kualitas dan popularitas produk (`rating_weighted`).
+*   Mengelompokkan produk berdasarkan struktur kategori (`main_category`, `sub_category`).
+*   Mengoptimalkan pencarian dan rekomendasi berbasis konten (`combined_text`).
 
 ### Seleksi Fitur
 
